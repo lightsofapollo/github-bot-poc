@@ -15,5 +15,10 @@
   "license": "Apache2",
   "bugs": {
     "url": "https://github.com/mozilla-b2g-bot/github-bot-poc/issues"
+  },
+  "dependencies": {
+    "bz": "~0.2.5",
+    "ini": "~1.1.0",
+    "github": "~0.1.10"
   }
 }
