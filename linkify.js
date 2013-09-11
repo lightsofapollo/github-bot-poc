@@ -3,22 +3,24 @@ function html_link (href) {
 }
 
 function meta_redirect_html (target) {
-    var html = "<html>\n<head><title>Redirect</title>\n" +
-        "<meta http-equiv=\"refresh\" content=\"0; url=" + target + "\">\n" +
-        "</head>\n<body><h1>Redirect</h1>" + html_link(target) + "</body></html>";
-    return html;
+    return "<html>\n<head>\n<title>Redirect</title>\n" +
+        "<meta http-equiv=\"refresh\" content=\"0; url=" +
+        target + "\">\n" + "</head>\n<body>\n<h1>Redirect</h1>\n" +
+        html_link(target) + "\n</body>\n</html>\n";
 }
-
 
 function link_bug (bz, github, user, repo, pr_num, bug_num, callback) {
     console.log("Creating BZ->GH link");
+
     var msg = {user: user, repo: repo, number: pr_num};
 
     github.pullRequests.get(msg, function(error, data) {
         if (error) { 
             return callback(error)
         }
-        var contents = new Buffer(meta_redirect_html(data.html_url)) .toString("base64");
+        var contents = new Buffer(meta_redirect_html(data.html_url))
+                           .toString("base64");
+
         console.log(contents)
 
         var attachment = {
@@ -40,7 +42,8 @@ function link_bug (bz, github, user, repo, pr_num, bug_num, callback) {
             if (error) {
                 return callback(error);
             }
-            console.log("Created attachment: " + data.ref)
+            console.log("Created attachment: " + data)
+            return callback(error, data);
         });
     });
 }
@@ -67,7 +70,7 @@ function link (bz, github, user, repo, pr_num, callback) {
                 if (bug_nums.length > 1) {
                     console.log("Found multiple bug numbers, using the first");
                 }
-                console.log("Using " + bug_nums[0])
+                console.log("Found bug:" + bug_nums[0])
                 return link_bug(bz, github, user, repo, pr_num, bug_nums[0], callback); 
             }
         }
