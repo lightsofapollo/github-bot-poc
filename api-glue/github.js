@@ -10,17 +10,17 @@ function init (config_file) {
         timeout: config.github.timeout,
     });
 
-    auth_deets = {}
+    authDeets = {}
     switch (config.github.authtype) {
         case "basic":
             console.log("Using Github basic authentication");
-            auth_deets["type"] = "basic";
-            auth_deets["username"] = config.github.username;
-            auth_deets["password"] = config.github.password;
+            authDeets["type"] = "basic";
+            authDeets["username"] = config.github.username;
+            authDeets["password"] = config.github.password;
             break;
     }
 
-    github.authenticate(auth_deets);
+    github.authenticate(authDeets);
     console.log("Authenticated with Github");
 
     return github;
