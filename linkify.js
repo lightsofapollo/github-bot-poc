@@ -43,7 +43,7 @@ function link_bug (bz, github, user, repo, pr_num, bug_num, callback) {
                 return callback(error);
             }
             console.log("Created attachment: " + data)
-            return callback(error, data);
+            return callback(undefined, data);
         });
     });
 }
