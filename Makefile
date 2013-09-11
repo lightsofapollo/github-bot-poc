@@ -1,5 +1,9 @@
 .PHONY: default
-default: lint
+default: lint test
+
+.PHONY: test
+test:
+	./node_modules/.bin/mocha $(shell find test -name "*_test.js")
 
 .PHONY: lint
 lint:
