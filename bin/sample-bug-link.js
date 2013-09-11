@@ -1,7 +1,7 @@
 var fs = require('fs');
 
-var bz_glue = require('../lib/api-glue/bz');
-var github_glue = require('../lib/api-glue/github');
+var bz_glue = require('../lib/api_glue/bz');
+var github_glue = require('../lib/api_glue/github');
 var linkify = require('../lib/linkify');
 
 var ini_file = 'ghb.ini';
